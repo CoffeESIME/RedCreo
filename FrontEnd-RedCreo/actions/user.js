@@ -40,3 +40,41 @@ export const getUserCourses = id => {
     return datos
 }
 
+
+export const SendReview = (userReview)=>{
+    let datos;
+    try {
+        datos= axios.post(API+'/addReview', 
+            {userReview}
+        ,
+        {headers: authHeader()}
+        )
+    } catch (error) {
+        datos={data:''}
+    }
+    return datos
+}
+
+export const getStars= (id)=>{
+    let datos;
+    try {
+        datos= axios.get(API+'/getReview/'+id)
+    }catch{
+        datos={data:''}
+    }
+    return datos
+}
+
+export const sendImage=(form)=>{
+    let datos;
+    try {
+        datos =  fetch(`${API}/uploadImage`, {
+          method: "POST",
+          headers: authHeader(),
+          body: form,
+        });
+      } catch{
+        datos={data:''}
+      }
+      return datos
+}

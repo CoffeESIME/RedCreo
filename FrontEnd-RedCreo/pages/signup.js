@@ -7,7 +7,6 @@ const Signup =()=>{
         <>
         <Layout>
             <SignUpForm></SignUpForm>
-            <Link href='/'>Home</Link>
         </Layout>
         </>
     );

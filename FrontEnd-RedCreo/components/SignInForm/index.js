@@ -145,7 +145,7 @@ function SignInForm() {
                 </Col>
               </Row>
               <p className="text-white text-center">
-                ¿No estas registrado?<Link href="/signup">Registrate</Link>
+                ¿No estas registrado? <Link href="/signup"> Registrate </Link>
               </p>
             </Form>
           </Col>

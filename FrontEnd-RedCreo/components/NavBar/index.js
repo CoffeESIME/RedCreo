@@ -6,23 +6,22 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { Row, Col } from "react-bootstrap";
 import { APP_NAME } from "../../config";
 import Link from "next/link";
-import { MdLogin, MdLogout,MdAccountCircle } from "react-icons/md";
+import { MdLogin, MdLogout, MdAccountCircle } from "react-icons/md";
 import { signout, isAuth } from "../../actions/auth";
 import Router from "next/router";
 import { useState, useEffect } from "react";
+import { IconContext } from "react-icons";
+
 export function NavBar() {
   const [options, setOptions] = useState(false);
-  const [profile, setProfile] = useState('');
+  const [profile, setProfile] = useState("");
   useEffect(() => {
     if (isAuth()) {
       setOptions(true);
-      if(isAuth().level===1 ){
-        setProfile( '/admin')
-
-      }
-      else{
-        setProfile( '/user')
-
+      if (isAuth().level === 1) {
+        setProfile("/admin");
+      } else {
+        setProfile("/user");
       }
     } else {
       setOptions(false);
@@ -47,7 +46,7 @@ export function NavBar() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link className="text-white">
-                    ¿Quiénes somos? {APP_NAME}
+                    ¿Quiénes somos?
                   </Nav.Link>
                   <Nav.Link className="text-white">Cursos</Nav.Link>
                   <Nav.Link className="text-white">Proyectos</Nav.Link>
@@ -73,15 +72,27 @@ export function NavBar() {
                   <Nav.Link className="text-white">Donaciones</Nav.Link>
                   <Nav.Link className="text-white">Contacto</Nav.Link>
                   {!options && (
-                    <div>
-                      <Link href="/signin" passHref>
-                        <Nav.Link className="text-white">
-                          Entrar <MdLogin />
-                        </Nav.Link>
-                      </Link>
-                      <Link href="/signup" passHref className="text-white">
-                        <Nav.Link>Registro</Nav.Link>
-                      </Link>
+                    <div className="container">
+                      <div className="row">
+                        <Link href="/signin" passHref className="position-relative">
+                          <Nav.Link className="text-white col-4">
+                            <div className="row  ">
+                              Entrar
+                              <IconContext.Provider
+                                value={{
+                                  className: "",style:{ position:'relative'}
+                                }}
+                              >
+                                {/* No he podido alinear este icono */}
+                                <MdLogin />
+                              </IconContext.Provider>
+                            </div>
+                          </Nav.Link>
+                        </Link>
+                        <Link href="/signup" passHref className="text-white">
+                          <Nav.Link className="col-4">Registro</Nav.Link>
+                        </Link>
+                      </div>
                     </div>
                   )}
 
@@ -99,16 +110,21 @@ export function NavBar() {
                 </Nav>
               </Navbar.Collapse>
               {options && (
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                 <MdAccountCircle className="" style={{width: '30px', height:'30px'}}/>
-                </Dropdown.Toggle>
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <MdAccountCircle
+                      className=""
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                  </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#"><Link href={profile}>Mi perfil</Link></Dropdown.Item>
-              
-                </Dropdown.Menu>
-              </Dropdown>)}
+                  <Dropdown.Menu>
+                    <Link href={profile} passHref>
+                      Mi perfil
+                    </Link>
+                  </Dropdown.Menu>
+                </Dropdown>
+              )}
             </Container>
           </Navbar>
         </Col>

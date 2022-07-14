@@ -23,11 +23,11 @@ export default function TableCourses(props) {
     });
   };
   useEffect(() => {
-    const getUserData = async () => {
+    const getUserDataCourse = async () => {
       const dataCourses = await getUserCourses(props.user);
       setUserCourses(dataCourses.data);
     };
-    getUserData();
+    getUserDataCourse();
   }, [deleteMessage,modalAdd]);
 
   return (
